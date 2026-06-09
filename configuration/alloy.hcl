@@ -50,21 +50,21 @@ loki.process "extract_level" {
   forward_to = [loki.write.default.receiver]
 }
 
-local.file_match "nethermind" {
+local.file_match "geth" {
   path_targets = [
     {
-      __path__     = "/var/log/nethermind/*.log",
-      service_name = "nethermind",
+      __path__     = "/var/log/geth/*.log",
+      service_name = "geth",
     },
   ]
 }
 
-loki.source.file "nethermind_logs" {
-  targets    = local.file_match.nethermind.targets
-  forward_to = [loki.process.nethermind.receiver]
+loki.source.file "geth_logs" {
+  targets    = local.file_match.geth.targets
+  forward_to = [loki.process.geth.receiver]
 }
 
-loki.process "nethermind" {
+loki.process "geth" {
   stage.regex {
     expression = "^[^|]*\\|(?P<level>[A-Z]+)\\|"
   }
