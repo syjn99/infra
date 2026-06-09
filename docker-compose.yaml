@@ -65,8 +65,11 @@ services:
       - --verbosity=debug
       # - --blob-storage-layout=by-epoch
       - --monitoring-host=0.0.0.0
+      # Profiling.
       - --pprof
       - --pprofaddr=0.0.0.0
+      - --mutexprofilefraction=5
+      - --blockprofilerate=1000000
       - --enable-tracing
       - --tracing-endpoint=http://tempo:4318/v1/traces
       - --tracing-process-name=beacon
